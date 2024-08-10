@@ -3,7 +3,7 @@ import { fetchAudio } from '../utils/fetchAudio';
 
 export const book1 = () => async (ctx: Context) => {
     const text = "Habits are the compound interest of self-improvement...";
-    const file_url = await fetchAudio(text, 'book1_speech', 'en-US-GuyNeural');
+    const file_url = await fetchAudio(text);
     
     try {
         await ctx.replyWithVoice({ url: file_url });

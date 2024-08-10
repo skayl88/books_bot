@@ -3,17 +3,17 @@ import { Message } from 'telegraf/typings/core/types/typegram';
 import { fetchAudio } from '../utils/fetchAudio';
 
 export const customText = () => async (ctx: any) => {
-    const text = ctx.update.message.text.trim(); // Убираем лишние пробелы
-    const filename = `custom_${Date.now()}`;
-    const model = 'en-US-GuyNeural';
+    const title = ctx.update.message.text.trim(); // Убираем лишние пробелы
+
     
-    if (!text) {
+    if (!title) {
         ctx.reply('Пожалуйста, отправьте текст для озвучивания.');
         return;
     }
 
     try {
-        const file_url = await fetchAudio(text, filename, model);
+        const data  = await fetchAudio(title);
+        const file_url = data.file_url
         await ctx.replyWithVoice({ url: file_url });
         // Если хотите отправить как аудиофайл
         // await ctx.replyWithAudio({ url: file_url });
